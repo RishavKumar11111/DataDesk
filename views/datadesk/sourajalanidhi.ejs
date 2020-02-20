@@ -1,0 +1,422 @@
+<div class="app-main__inner" ng-controller="souraJalanidhiCtrl" ng-init="Loaddash(); Loaddash1(); Loadsubcidy(); Loadmodelwise(); LoadTarget(); LoadPayment(); LoadAppliedMonthwise(); LoadTargetApex(); LoadAppliedMonthwiseApex();">
+    <script src="../../public/javascripts/apexcharts.min.js"></script>
+    <div class="app-page-title app-page-title-simple">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    <div class="page-title-head center-elem">
+                        <span class="d-inline-block pr-2">
+                            <i class="lnr-apartment opacity-6"></i>
+                        </span>
+                        <span class="d-inline-block">Soura Jalanidhi</span>
+                    </div>
+                    <div class="page-title-subheading opacity-10">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a>
+                                        <i aria-hidden="true" class="fa fa-home"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a>Dashboard</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mbg-3 alert alert-info alert-dismissible fade show" role="alert">
+        <b>Financial Year: 2018-19</b>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card" style="background-image: linear-gradient(to bottom right, #9fb4eb, #3f6ad8);">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Targets</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div style="padding-top: 42px;">
+                                    {{dash[0].target - dash1[0].target}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-danger card" style="background-image: linear-gradient(to bottom right, #ec92a7, #d92550)">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Beneficiaries applied</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash[1].applied}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-warning border-success card" style="background-image: linear-gradient(to bottom right, #9ce1be, #3ac47d)">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Go-Aheads generated</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash[2].validapplication}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-success border-primary card" style="background-image: linear-gradient(to bottom right, #9fb4eb, #3f6ad8);">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Installations completed</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash[3].installed}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-danger card" style="background-image: linear-gradient(to bottom right, #ec92a7, #d92550)">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Subsidy Released (Physically)</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash[4].subcidy}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-success card" style="background-image: linear-gradient(to bottom right, #9ce1be, #3ac47d); min-height: 118px;">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Subsidy Released (Financially)</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100" style="padding-top: 16px;">
+                            <div class="widget-chart-flex align-items-center">
+                                <div style="font-size: 16px;">
+                                    ₹ {{num1}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mbg-3 alert alert-info alert-dismissible fade show" role="alert">
+        <b>Financial Year: 2019-20</b>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card" style="background-image: linear-gradient(to bottom right, #9fb4eb, #3f6ad8);">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Targets</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div style="padding-top: 42px;">
+                                    {{dash1[0].target}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-danger card" style="background-image: linear-gradient(to bottom right, #ec92a7, #d92550)">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Beneficiaries applied</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash1[1].applied}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-warning border-success card" style="background-image: linear-gradient(to bottom right, #9ce1be, #3ac47d)">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Go-Aheads generated</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash1[2].validapplication}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-success border-primary card" style="background-image: linear-gradient(to bottom right, #9fb4eb, #3f6ad8);">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Total Installations completed</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash1[3].installed}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-danger card" style="background-image: linear-gradient(to bottom right, #ec92a7, #d92550)">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Subsidy Released (Physically)</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100">
+                            <div class="widget-chart-flex align-items-center">
+                                <div>
+                                    {{dash1[4].subcidy}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-success card" style="background-image: linear-gradient(to bottom right, #9ce1be, #3ac47d); min-height: 118px;">
+                <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content">
+                        <div class="widget-title opacity-5 text-uppercase"><b>Subsidy Released (Financially)</b></div>
+                        <div class="widget-numbers mt-2 fsize-4 mb-0 w-100" style="padding-top: 16px;">
+                            <div class="widget-chart-flex align-items-center">
+                                <div style="font-size: 16px;">
+                                    ₹ {{num}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" role="tabpanel">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-hover-shadow card-border mb-3 mx-auto card" style="width: 50%;">
+                        <div class="card-body" style="background-color: #d0eeff;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="card-title">Financial Year</h5>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="fyid" ng-model="ddlFY" ng-change="LoadPayment(); Loadmodelwise(); Loadsubcidy(); LoadTarget(); LoadAppliedMonthwise();" name="customSelect" class="custom-select">
+                                            <option value="">Select Financial Year</option>
+                                            <option value="2018-19">2018-19</option>
+                                            <option value="2019-20">2019-20</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mbg-3 alert alert-info alert-dismissible fade show" role="alert">
+        <b>Payment Status</b>
+    </div>
+    <div class="tabs-animation">
+        <div class="row">
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-night-fade" style="height: 94px; border-radius: 50px;">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Installations completed</div>
+                            <div class="widget-subheading">{{paydata[0].installed}} No.</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span style="white-space: nowrap; font-size: 22px;">Rs. {{subcidy3}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-arielle-smile" style="border-radius: 50px;">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Approved by DAFP</div>
+                            <div class="widget-subheading" style="padding-top: 21px;">{{paydata[1].subcidy}} No.</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span style="white-space: nowrap; font-size: 22px;">Rs. {{subcidy1}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-happy-green" style="height: 94px; border-radius: 50px;">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Payment realesed</div>
+                            <div class="widget-subheading">{{paydata[2].subcidyrealesed}} No.</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span style="white-space: nowrap; font-size: 22px;">Rs. {{subcidy2}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" role="tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-hover-shadow card-border mb-3 card">
+                        <div class="card-header" style="background-color: #d0eeff;">Total Area Affected (in ha)&nbsp;&nbsp;&nbsp;<small>Crop Category-wise</small></div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <div id="chartTAACC"></div>
+                        </div>
+                    </div>
+                    <div class="card-hover-shadow card-border mb-3 card">
+                        <div class="card-header" style="background-color: #d0eeff;">Total Area Affected & Treated (in ha)&nbsp;&nbsp;&nbsp;<small>(Weekly)</small></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Date : ({{getJDAPPDetails[2][0].StartDate}} - {{getJDAPPDetails[2][0].EndDate}}) | Week Number - {{getJDAPPDetails[2][0].WeekNo}}</h5>
+                            <div id="chartTAATW"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-hover-shadow card-border mb-3 card" style="min-height: 310px;">
+                        <div class="card-header" style="background-color: #d0eeff;">Total Area Affected Crop (in ha)&nbsp;&nbsp;&nbsp;<small>Crop-wise</small></div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <div id="chartTAAC"></div>
+                        </div>
+                    </div>
+                    <div class="card-hover-shadow card-border mb-3 card" style="min-height: 322px;">
+                        <div class="card-header" style="background-color: #d0eeff;">Total Area Affected & Treated (in ha)</div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <div id="chartTAAT"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-hover-shadow card-border mb-3 card">
+                        <div class="card-header" style="background-color: #d0eeff;">Number of Advisories for different Cereal Crops (in Kharif)</div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <div id="chartNADC"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" role="tabpanel">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-hover-shadow card-border mb-3 card">
+                        <div class="card-header" style="background-color: #d0eeff;">Total Area Affected (in ha)&nbsp;&nbsp;&nbsp;<small>(Crop Category-wise and Crop-wise)</small></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5 class="card-title">Crop Category</h5>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="ccid" ng-model="ddlCropCategory" ng-options="i.CategoryCode as i.CategoryName for i in cropCategories" ng-change="getCropsByCategory()" name="customSelect" class="custom-select">
+                                            <option value="" disabled>Select Crop Category</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="card-title">Crop</h5>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="cid" ng-model="ddlCrop" ng-options="i.CropCode as i.CropName for i in crops" ng-change="getPestDiseases()" name="customSelect" class="custom-select">
+                                            <option value="" disabled>Select Crop</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="card-title">Month</h5>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="mid" ng-model="ddlMonth" ng-options="i.MonthCode as i.MonthName for i in months" ng-change="destroyGraph()" name="customSelect" class="custom-select">
+                                            <option value="">Select Month</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="pestDiseases.length > 0">
+                                <div class="col-md-12">
+                                    <h5 class="card-title">Pests</h5>
+                                    <div class="position-relative form-group">
+                                        <div>
+                                            <div class="custom-checkbox custom-control custom-control-inline" ng-repeat="i in pestDiseases">
+                                                <input type="checkbox" id="p{{$index}}cb" ng-model="i.selected" ng-change="getValue();" ng-true-value="true" ng-false-value="false" class="custom-control-input">
+                                                <label class="custom-control-label" for="p{{$index}}cb">{{i.PestDiseaseName}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-block text-right card-footer">
+                            <button class="btn-shadow-primary btn btn-primary btn-lg" ng-disabled="pests.length == 0 || ddlCropCategory == null || ddlCropCategory == undefined" ng-click="getPestGraphData();">Generate Pest Graph</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content" ng-show="sumTAA != 0">
+        <div class="tab-pane tabs-animation fade show active" role="tabpanel">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-hover-shadow card-border mb-3 card">
+                        <div class="card-header">Pest Affected Area (in ha)</div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <div id="chartPAA"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

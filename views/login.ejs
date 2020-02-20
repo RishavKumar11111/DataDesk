@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Language" content="en">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>DataDesk</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <meta name="description" content="DataDesk">
+        <!-- Disable tap highlight on IE -->
+        <meta name="msapplication-tap-highlight" content="no">
+        <link href="../architectui-html-pro/main.css" rel="stylesheet">
+        <script src="../public/javascripts/jquery.min.js"></script>
+        <script src="../public/javascripts/angular.min.js"></script>
+    </head>
+    <body ng-app="loginApp" ng-controller="loginCtrl" ng-init="generateCaptcha()" ng-cloak>
+        <div class="app-container app-theme-white body-tabs-shadow">
+            <div class="app-container">
+                <div class="h-100 bg-animation" style="background: url(../public/images/bg.jpg)">
+                    <div class="d-flex h-100 justify-content-center align-items-center">
+                        <div class="mx-auto app-login-box col-md-8">
+                            <div class="app-logo-inverse mx-auto mb-3"></div>
+                            <div class="modal-dialog w-100 mx-auto">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="h5 modal-title text-center">
+                                            <h4 class="mt-2">
+                                                <div>Welcome back,</div>
+                                                <span>Please sign in to your account below.</span>
+                                            </h4>
+                                        </div>
+                                        <input type="hidden" name="randomNo" id="rno" value="<%= randomNo %>">
+                                        <form method="POST" id="formLogin" action="/" role="form" name="loginForm" autocomplete="off" novalidate>
+                                            <input type="hidden" name="_csrf" id="_csrf" value="<%=csrfToken %>">
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="position-relative form-group">
+                                                        <input ng-model="txtUsername" id="un" name="username" placeholder="Enter Username..." type="text" class="form-control" maxlength="30" required>
+                                                    </div>
+                                                    <div class="has-error" ng-show="loginForm.$submitted || loginForm.username.$touched" style="color:red">
+                                                        <span ng-show="loginForm.username.$error.required">This is a required field</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="position-relative form-group">
+                                                        <input ng-model="txtPassword" id="pwd" name="password" placeholder="Enter Password..." type="password" class="form-control" maxlength="50" required>
+                                                    </div>
+                                                    <div class="has-error" ng-show="loginForm.$submitted || loginForm.password.$touched" style="color:red">
+                                                        <span ng-show="loginForm.password.$error.required">This is a required field</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="position-relative form-check"><input name="check" id="exampleCheck" type="checkbox" class="form-check-input"><label for="exampleCheck" class="form-check-label">Keep me logged in</label></div> -->
+                                            <div class="divider"></div>
+                                            <!-- <h6 class="mb-0">No account? <a href="javascript:void(0);" class="text-primary">Sign up now</a></h6> -->
+                                            <h6 class="mb-0">Forgot Password? <a href="javascript:void(0);" class="text-primary" onclick="alert('Please contact administrator.')">Recover here</a></h6>
+                                            <div class="modal-footer clearfix">
+                                                <!-- <div class="float-left"><a href="javascript:void(0);" class="btn-lg btn btn-link" onclick="alert('Please contact administrator.')">Recover Password</a></div> -->
+                                                <div style="display: contents">
+                                                    <!-- <a href="" ng-click="generateCaptcha()"><i class="fa fa-fw" aria-hidden="true" title="Click to Reload Captcha"></i></a> -->
+                                                    <img ng-src="{{captcha}}">
+                                                    <div>=</div>
+                                                    <input ng-model="txtCaptcha" id="cpth" name="captcha" placeholder="Enter Captcha..." type="text" class="form-control" maxlength="10" required>
+                                                </div>
+                                                <div class="float-right">
+                                                    <input type="submit" id="btnLogin" class="btn btn-primary btn-lg" value="Sign in" ng-disabled="loginForm.$invalid" />
+                                                </div>
+                                            </div>
+                                            <div style="color: red"><b><%= error %></b></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center text-white opacity-8 mt-3">Designed and developed by National Informatics Centre, Odisha</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="../architectui-html-pro/assets/scripts/main.js"></script>
+        <script type="text/javascript" src="../public/javascripts/sha256.min.js"></script>
+        <script>
+            var app = angular.module('loginApp', []);
+        </script>
+        <script>
+            history.pushState(null, document.title, location.href);
+            window.addEventListener('popstate', function(event) {
+                history.pushState(null, document.title, location.href);
+            });
+        </script>
+        <script src="../public/controllers/loginCtrl.js"></script>
+        <script>
+            $(function() {
+                $('#btnLogin').click(function() {
+                    if ($('#un').val() != '' && $('#pwd').val() != '' && $('#cpth').val() != '') {
+                        $('#pwd').val(sha256(sha256($('#pwd').val()) + $('#rno').val()));
+                        $("#formLogin").submit();
+                    } else {
+                        alert('Please enter Username, Password and Captcha.');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
