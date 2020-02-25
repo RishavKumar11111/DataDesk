@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 col-lg-2">
-            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card" style="background-image: linear-gradient(to bottom right, #9fb4eb, #3f6ad8);">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card" style="background-image: linear-gradient(to bottom right, #aaf0d1, #50bfe6)">
                 <div class="widget-chat-wrapper-outer">
                     <div class="widget-chart-content">
                         <div class="widget-title opacity-5 text-uppercase"><b>Total AAO Registered</b></div>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-2">
-            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-danger card" style="background-image: linear-gradient(to bottom right, #ec92a7, #d92550)">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-danger card" style="background-image: linear-gradient(to bottom right, #ffcc33, #ff355e)">
                 <div class="widget-chat-wrapper-outer">
                     <div class="widget-chart-content">
                         <div class="widget-title opacity-5 text-uppercase"><b>Total VAW registered</b></div>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-2">
-            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-warning border-success card" style="background-image: linear-gradient(to bottom right, #9ce1be, #3ac47d)">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-warning border-success card" style="background-image: linear-gradient(to bottom right, #ccff00, #66ff66)">
                 <div class="widget-chat-wrapper-outer">
                     <div class="widget-chart-content">
                         <div class="widget-title opacity-5 text-uppercase"><b style="font-size: 14px;">Total Area Affected (AAO)</b></div>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-2">
-            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-success border-primary card" style="background-image: linear-gradient(to bottom right, #9fb4eb, #3f6ad8);">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-success border-primary card" style="background-image: linear-gradient(to bottom right, #aaf0d1, #50bfe6)">
                 <div class="widget-chat-wrapper-outer">
                     <div class="widget-chart-content">
                         <div class="widget-title opacity-5 text-uppercase"><b>Total Area Treated (AAO)</b></div>
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-2">
-            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-danger card" style="background-image: linear-gradient(to bottom right, #ec92a7, #d92550)">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-danger card" style="background-image: linear-gradient(to bottom right, #ffcc33, #ff355e)">
                 <div class="widget-chat-wrapper-outer">
                     <div class="widget-chart-content">
                         <div class="widget-title opacity-5 text-uppercase"><b style="font-size: 13px;">Area inspected by VAW</b></div>
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-2">
-            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-success card" style="background-image: linear-gradient(to bottom right, #9ce1be, #3ac47d); min-height: 118px;">
+            <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-danger border-success card" style="background-image: linear-gradient(to bottom right, #ccff00, #66ff66); min-height: 118px;">
                 <div class="widget-chat-wrapper-outer">
                     <div class="widget-chart-content">
                         <div class="widget-title opacity-5 text-uppercase"><b>Light Trap Catch</b></div>
@@ -188,14 +188,20 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card-hover-shadow card-border mb-3 card" style="min-height: 310px;">
+                    <div class="card-hover-shadow card-border mb-3 card" style="min-height: 311px;">
                         <div class="card-header" style="background-color: #d0eeff;">Total Area Affected Crop (in ha)&nbsp;&nbsp;&nbsp;<small>Crop-wise</small></div>
-                        <div class="card-body">
+                        <div class="card-body" id="taac">
                             <h5 class="card-title"></h5>
                             <div id="chartTAAC"></div>
                         </div>
+                        <div class="card-body" id="noData">
+                            <h5 class="card-title" style="color: red; text-align: center;">No Data is found</h5>
+                        </div>
+                        <div class="card-body" id="noClick">
+                            <h5 class="card-title" style="color: red; text-align: center;">Please click on the Crop category to generate the Crop-wise graph of Total Area Affected</h5>
+                        </div>
                     </div>
-                    <div class="card-hover-shadow card-border mb-3 card" style="min-height: 315px;">
+                    <div class="card-hover-shadow card-border mb-3 card" style="min-height: 321px;">
                         <div class="card-header" style="background-color: #d0eeff;">Total Area Affected & Treated (in ha)</div>
                         <div class="card-body">
                             <h5 class="card-title"></h5>

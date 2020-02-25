@@ -331,16 +331,16 @@ app.controller('epestCtrl', function ($scope, $http) {
                     if ($scope.sumTAA > 0) {
                         var pestName = [];
                         var affectedPestArea = [];
-                        var bColor = [];
+                        // var bColor = [];
                         for (var i = 0; i < graphData.length; i++) {
                             var pest = graphData[i].PestDiseaseName;
                             var affectedArea = graphData[i].TotalAffectedArea;
                             pestName.push(pest);
                             affectedPestArea.push(affectedArea);
                         }
-                        for (var i = 0; i <= pestName.length; i++) {
-                            bColor.push('rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')');
-                        }
+                        // for (var i = 0; i <= pestName.length; i++) {
+                        //     bColor.push('rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')');
+                        // }
                         var optionsPAA = {
                             series: [{
                                 name: 'Total Area Affected (In HA)',
@@ -428,11 +428,22 @@ app.controller('epestCtrl', function ($scope, $http) {
         if (chartPAA) chartPAA.destroy();
     };
 
-    var bColor = [];
+    function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.response);
+        }
+        xmlHttp.open("GET", theUrl, true);
+        xmlHttp.send(null);
+    };
+
+    // var bColor = [];
     var ctxTAACC = document.getElementById('chartTAACC');
     var chartTAACC = null;
     var ctxTAAC = document.getElementById('chartTAAC');
     var chartTAAC = null;
+    document.getElementById('noData').style.display = 'none';
     $scope.getGD = function () {
         var cropCategoryName = [];
         var affectedPestArea = [];
@@ -448,9 +459,9 @@ app.controller('epestCtrl', function ($scope, $http) {
                     affectedPestArea.push(affectArea);
                     categoryCode.push(catCode);
                 }
-                for (var i = 0; i < cropCategoryName.length; i++) {
-                    bColor.push('rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')');
-                }
+                // for (var i = 0; i < cropCategoryName.length; i++) {
+                //     bColor.push('rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')');
+                // }
                 var optionsTAACC = {
                     colors: ['#fdf498', '#f37736', '#7bc043', '#0392cf', '#ee4035'],
                     plotOptions: {
@@ -472,62 +483,76 @@ app.controller('epestCtrl', function ($scope, $http) {
                             dataPointSelection: function (event, chartContext, config) {
                                 var categoryCode = config.w.config.code[config.dataPointIndex];
                                 var colorSelected = config.w.config.colors[config.dataPointIndex];
-                                console.log(colorSelected);
                                 var cropHectareName = [];
                                 var affectedCropArea = [];
-                                var bagColor = [];
+                                // var bagColor = [];
                                 if (chartTAAC) chartTAAC.destroy();
-                                $http.get('https://www.epestodisha.nic.in/jdapp/getCropDetailsCategory?cropCode=' + categoryCode + '&season=' + $scope.cbSeason + '&financialYear=' + $scope.ddlFY).then(function success(res) {
-                                    var barData = res.data;
+                                httpGetAsync('https://www.epestodisha.nic.in/jdapp/getCropDetailsCategory?cropCode=' + categoryCode + '&season=' + $scope.cbSeason + '&financialYear=' + $scope.ddlFY, function success(res) {
+                                    var barData = JSON.parse(res);
+                                    var sumBD = 0;
+                                    for (var i = 0; i < barData.length; i++) {
+                                        sumBD += barData[i].TotalAffectedArea;
+                                    }
                                     if (barData.length > 0) {
-                                        for (var i = 0; i < barData.length; i++) {
-                                            var cropName = barData[i].CropName;
-                                            var affectArea = barData[i].TotalAffectedArea;
-                                            cropHectareName.push(cropName);
-                                            affectedCropArea.push(affectArea);
+                                        if (sumBD != 0) {
+                                            document.getElementById('noData').style.display = 'none';
+                                            document.getElementById('noClick').style.display = 'none';
+                                            for (var i = 0; i < barData.length; i++) {
+                                                var cropName = barData[i].CropName;
+                                                var affectArea = barData[i].TotalAffectedArea;
+                                                cropHectareName.push(cropName);
+                                                affectedCropArea.push(affectArea);
+                                            }
+                                            // for (var i = 0; i < cropName.length; i++) {
+                                            //     bagColor.push('rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')');
+                                            // }
+                                            var optionsTAAC = {
+                                                series: [{
+                                                    name: 'Area Affected (in HA)',
+                                                    data: affectedCropArea
+                                                }],
+                                                chart: {
+                                                    height: 185,
+                                                    type: 'bar'
+                                                },
+                                                colors: [colorSelected],
+                                                plotOptions: {
+                                                    bar: {
+                                                        columnWidth: '45%',
+                                                        distributed: true
+                                                    }
+                                                },
+                                                dataLabels: {
+                                                    enabled: false
+                                                },
+                                                legend: {
+                                                    show: false
+                                                },
+                                                xaxis: {
+                                                    categories: cropHectareName,
+                                                    labels: {
+                                                        style: {
+                                                            // colors: bagColor,
+                                                            fontSize: '12px'
+                                                        }
+                                                    }
+                                                }
+                                            };
+                                            chartTAAC = new ApexCharts(ctxTAAC, optionsTAAC);
+                                            chartTAAC.render();
                                         }
-                                        for (var i = 0; i < cropName.length; i++) {
-                                            bagColor.push('rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')');
+                                        else {
+                                            document.getElementById('noData').style.display = 'block';
+                                            document.getElementById('noClick').style.display = 'none';
+                                            document.getElementById('taac').style.height = '0px';
                                         }
                                     }
-                                    var optionsTAAC = {
-                                        series: [{
-                                            name: 'Area Affected (in HA)',
-                                            data: affectedCropArea
-                                        }],
-                                        chart: {
-                                            height: 185,
-                                            type: 'bar'
-                                        },
-                                        colors: [colorSelected],
-                                        plotOptions: {
-                                            bar: {
-                                                columnWidth: '45%',
-                                                distributed: true
-                                            }
-                                        },
-                                        dataLabels: {
-                                            enabled: false
-                                        },
-                                        legend: {
-                                            show: false
-                                        },
-                                        xaxis: {
-                                            categories: cropHectareName,
-                                            labels: {
-                                                style: {
-                                                    // colors: bagColor,
-                                                    fontSize: '12px'
-                                                }
-                                            }
-                                        }
-                                    };
-                                    chartTAAC = new ApexCharts(ctxTAAC, optionsTAAC);
-                                    chartTAAC.render();
+                                    else {
+                                        document.getElementById('noClick').style.display = 'block';
+                                        document.getElementById('noData').style.display = 'none';
+                                    }
                                 }, function error(response) {
                                     console.log(response.status);
-                                }).catch(function err(error) {
-                                    console.log('An error occurred...', error);
                                 });
                             }
                         }
