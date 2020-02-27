@@ -1,4 +1,4 @@
-<div class="app-main__inner" ng-controller="souraJalanidhiCtrl" ng-init="Loaddash(); Loaddash1(); Loadsubcidy(); Loadmodelwise(); LoadPayment(); LoadTargetApex(); LoadAppliedMonthwiseApex();">
+<div class="app-main__inner" ng-controller="souraJalanidhiCtrl" ng-init="Loaddash(); Loaddash1(); Loadsubcidy(); Loadmodelwise(); LoadPayment(); LoadTarget(); LoadAppliedMonthwise();">
     <script src="../../public/javascripts/apexcharts.min.js"></script>
     <div class="app-page-title app-page-title-simple">
         <div class="page-title-wrapper">
@@ -240,7 +240,7 @@
                                 <div class="col-md-12">
                                     <h5 class="card-title">Financial Year</h5>
                                     <div class="position-relative form-group">
-                                        <select type="select" id="fyid" ng-model="ddlFY" ng-change="LoadPayment(); Loadmodelwise(); Loadsubcidy(); LoadTargetApex(); LoadAppliedMonthwiseApex();" name="customSelect" class="custom-select">
+                                        <select type="select" id="fyid" ng-model="ddlFY" ng-change="LoadPayment(); Loadmodelwise(); Loadsubcidy(); LoadTarget(); LoadAppliedMonthwise();" name="customSelect" class="custom-select">
                                             <option value="">Select Financial Year</option>
                                             <option value="2018-19">2018-19</option>
                                             <option value="2019-20">2019-20</option>

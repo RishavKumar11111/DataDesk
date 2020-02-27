@@ -162,7 +162,7 @@ app.controller('souraJalanidhiCtrl', function ($scope, $http) {
 
     var ctxTTD = document.getElementById('chartTTD');
     var chartTTD = null;
-    $scope.LoadTargetApex = function () {
+    $scope.LoadTarget = function () {
         if (chartTTD) chartTTD.destroy();
         $http.get("https://odishasolarpump.nic.in/loadTargetGraph?financialYear=" + $scope.ddlFY).then(function (res) {
             $scope.resp2 = res.data;
@@ -237,9 +237,9 @@ app.controller('souraJalanidhiCtrl', function ($scope, $http) {
 
     var ctxTAM = document.getElementById('chartTAM');
     var chartTAM = null;
-    $scope.LoadAppliedMonthwiseApex = function () {
+    $scope.LoadAppliedMonthwise = function () {
         if (chartTAM) chartTAM.destroy();
-        $http.get("http://10.172.31.63:8080/loadmonthwiseappliedgraph?financialYear=" + $scope.ddlFY).then(function (res) {
+        $http.get("https://odishasolarpump.nic.in/loadmonthwiseappliedgraph?financialYear=" + $scope.ddlFY).then(function (res) {
             $scope.resp3 = res.data;
             if ($scope.resp3.length > 0) {
                 var monthnm = [];
