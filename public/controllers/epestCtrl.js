@@ -310,8 +310,6 @@ app.controller('epestCtrl', function ($scope, $http) {
         }, true)
     };
 
-
-
     var ctxPAA = document.querySelector("#chartPAA");
     var chartPAA = null;
     $scope.sumTAA = 0;
