@@ -1,8 +1,13 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('DataDesk', 'sa', 'sa@123#', {
     host: 'localhost',
-    dialect: 'mssql',
-    logging: false
+    dialect: 'mssql'
+    // ,
+    // operatorsAliases: false,
+    // logging: false,
+    // dialectOptions: {
+    //     encrypt: false
+    // }
 });
 
 const sql = require('mssql');
