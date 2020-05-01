@@ -10,7 +10,11 @@ const locConfig = {
     user: 'sa',
     password: 'sa@123#',
     server: 'localhost',
-    database: 'DataDesk'
+    database: 'DataDesk',
+    options: {
+        encrypt: false
+    }
+
 };
 
 // const Sequelize = require('sequelize');
@@ -25,7 +29,10 @@ const locConfig = {
 //     password: 'DataDesk@123#',
 //     server: '164.100.140.101',
 //     database: 'DataDesk',
-//     requestTimeout: 3600000
+//     requestTimeout: 3600000,
+//     options: {
+//         encrypt: false
+//     }
 // };
 
 sequelize
